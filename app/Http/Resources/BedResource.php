@@ -14,7 +14,7 @@ class BedResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $active = $this->whenLoaded('activeOccupancy');
+        $active = $this->activeOccupancy ?? null;
 
         return [
             'id' => $this->id,
