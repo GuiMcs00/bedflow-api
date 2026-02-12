@@ -11,10 +11,12 @@ Route::get('/health-check-api', function () {
 
 Route::prefix('beds')->group(function () {
     Route::get('/', [BedController::class, 'index']);
-    Route::get('/{bed}', [BedController::class, 'show']);
-
-    Route::post('/{bed}/occupy', [BedController::class, 'occupy']);
-    Route::post('/{bed}/release', [BedController::class, 'release']);
+    Route::get('/{bed}', [BedController::class, 'show'])
+        ->whereNumber('bed');
+    Route::post('/{bed}/occupy', [BedController::class, 'occupy'])
+        ->whereNumber('bed');
+    Route::post('/{bed}/release', [BedController::class, 'release'])
+        ->whereNumber('bed');
 
     Route::post('/transfer', [BedTransferController::class, 'transfer']);
 });
